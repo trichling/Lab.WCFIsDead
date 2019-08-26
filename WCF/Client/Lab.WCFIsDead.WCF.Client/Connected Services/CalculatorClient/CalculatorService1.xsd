@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Lab.WCFIsDead.WCF.Server" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Lab.WCFIsDead.WCF.Server" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="Calculation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Operand1" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Operand2" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Opertor" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Calculation" nillable="true" type="tns:Calculation" />
+  <xs:complexType name="CalculationResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Calculation" nillable="true" type="tns:Calculation" />
+      <xs:element minOccurs="0" name="Result" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CalculationResult" nillable="true" type="tns:CalculationResult" />
+</xs:schema>
