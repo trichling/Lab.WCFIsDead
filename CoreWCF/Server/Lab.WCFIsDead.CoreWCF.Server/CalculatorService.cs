@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.ServiceModel.Web;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
+using CoreWCF;
+using Lab.WCFIsDead.CoreWCF.Shared.Contract;
 
-namespace Lab.WCFIsDead.WCF.Server
+namespace Lab.WCFIsDead.CoreWCF.Server
 {
     public class CalculatorService : ICalculatorService
     {
@@ -39,5 +35,6 @@ namespace Lab.WCFIsDead.WCF.Server
                 }
             });
         }
+
     }
 }

@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Runtime.Serialization;
-
-#if WCF
-using System.ServiceModel;
-#endif
-
-#if COREWCF
 using CoreWCF;
-#endif
 
-namespace Lab.WCFIsDead.WCF.Server
+// Namespace in Server und Client muss gleich sein, sonst klappt das Deserialsieren bei TCP nicht (binary!!)
+namespace Lab.WCFIsDead.CoreWCF.Shared.Contract
 {
     [ServiceContract(CallbackContract = typeof(IRandomNumber))]
     public interface ICalculatorService
@@ -21,7 +15,6 @@ namespace Lab.WCFIsDead.WCF.Server
         [OperationContract]
         void GenerateRandomNumbers(Guid requestId, int count, int delayInMs);
 
-
     }
 
     [ServiceContract]
@@ -32,7 +25,6 @@ namespace Lab.WCFIsDead.WCF.Server
         void Receive(Guid requestId, double randomNumber);
 
     }
-
 
     [DataContract]
     public class Calculation

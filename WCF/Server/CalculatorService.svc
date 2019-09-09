@@ -1,1 +1,0 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="Lab.WCFIsDead.WCF.Server.CalculatorService" CodeBehind="CalculatorService.svc.cs" %>
