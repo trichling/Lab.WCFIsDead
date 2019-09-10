@@ -50,22 +50,34 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\RandomNumberClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Connected Services\CalculatorClient\CalculatorService.wsdl" />
-    <None Include="Connected Services\CalculatorClient\CalculatorService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\CalculatorClient\CalculatorService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\CalculatorClient\CalculatorService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="Connected Services\CalculatorClient\ICalculatorService.wsdl" />
     <None Include="Connected Services\CalculatorClient\Lab.WCFIsDead.WCF.Client.CalculatorClient.CalculationResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\CalculatorClient\Lab.WCFIsDead.WCF.Client.CalculatorClient.ExecuteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\RandomNumberClient\CalculatorService.wsdl" />
+    <None Include="Connected Services\RandomNumberClient\CalculatorService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\RandomNumberClient\CalculatorService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\RandomNumberClient\CalculatorService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\RandomNumberClient\Lab.WCFIsDead.WCF.Client.RandomNumberClient.CalculationResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
   </ItemGroup>
@@ -74,9 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\CalculatorClient\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\CalculatorClient\CalculatorService.disco" />
+    <WCFMetadataStorage Include="Connected Services\RandomNumberClient\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\CalculatorClient\configuration91.svcinfo" />
@@ -86,6 +96,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\CalculatorClient\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\RandomNumberClient\CalculatorService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\RandomNumberClient\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\RandomNumberClient\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\RandomNumberClient\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

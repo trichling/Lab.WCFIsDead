@@ -15,17 +15,15 @@ namespace Lab.WCFIsDead.WCF.Client.CalculatorClient {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Calculation", Namespace="http://schemas.datacontract.org/2004/07/Lab.WCFIsDead.WCF.Server")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Calculation", Namespace="http://tempuri.org/")]
     [System.SerializableAttribute()]
     public partial class Calculation : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private decimal Operand1Field;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private decimal Operand2Field;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -41,7 +39,7 @@ namespace Lab.WCFIsDead.WCF.Client.CalculatorClient {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
         public decimal Operand1 {
             get {
                 return this.Operand1Field;
@@ -54,7 +52,7 @@ namespace Lab.WCFIsDead.WCF.Client.CalculatorClient {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
         public decimal Operand2 {
             get {
                 return this.Operand2Field;
@@ -67,7 +65,7 @@ namespace Lab.WCFIsDead.WCF.Client.CalculatorClient {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
         public string Opertor {
             get {
                 return this.OpertorField;
@@ -92,7 +90,7 @@ namespace Lab.WCFIsDead.WCF.Client.CalculatorClient {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CalculationResult", Namespace="http://schemas.datacontract.org/2004/07/Lab.WCFIsDead.WCF.Server")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CalculationResult", Namespace="http://tempuri.org/")]
     [System.SerializableAttribute()]
     public partial class CalculationResult : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -102,7 +100,6 @@ namespace Lab.WCFIsDead.WCF.Client.CalculatorClient {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Lab.WCFIsDead.WCF.Client.CalculatorClient.Calculation CalculationField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private decimal ResultField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -115,7 +112,7 @@ namespace Lab.WCFIsDead.WCF.Client.CalculatorClient {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
         public Lab.WCFIsDead.WCF.Client.CalculatorClient.Calculation Calculation {
             get {
                 return this.CalculationField;
@@ -128,7 +125,7 @@ namespace Lab.WCFIsDead.WCF.Client.CalculatorClient {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
         public decimal Result {
             get {
                 return this.ResultField;
@@ -152,27 +149,83 @@ namespace Lab.WCFIsDead.WCF.Client.CalculatorClient {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="CalculatorClient.ICalculatorService", CallbackContract=typeof(Lab.WCFIsDead.WCF.Client.CalculatorClient.ICalculatorServiceCallback))]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="CalculatorClient.ICalculatorService")]
     public interface ICalculatorService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICalculatorService/Execute", ReplyAction="http://tempuri.org/ICalculatorService/ExecuteResponse")]
-        Lab.WCFIsDead.WCF.Client.CalculatorClient.CalculationResult Execute(Lab.WCFIsDead.WCF.Client.CalculatorClient.Calculation calculation);
+        // CODEGEN: Generating message contract since element name calculation from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICalculatorService/Execute", ReplyAction="*")]
+        Lab.WCFIsDead.WCF.Client.CalculatorClient.ExecuteResponse Execute(Lab.WCFIsDead.WCF.Client.CalculatorClient.ExecuteRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICalculatorService/Execute", ReplyAction="http://tempuri.org/ICalculatorService/ExecuteResponse")]
-        System.Threading.Tasks.Task<Lab.WCFIsDead.WCF.Client.CalculatorClient.CalculationResult> ExecuteAsync(Lab.WCFIsDead.WCF.Client.CalculatorClient.Calculation calculation);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICalculatorService/GenerateRandomNumbers", ReplyAction="http://tempuri.org/ICalculatorService/GenerateRandomNumbersResponse")]
-        void GenerateRandomNumbers(System.Guid requestId, int count, int delayInMs);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICalculatorService/GenerateRandomNumbers", ReplyAction="http://tempuri.org/ICalculatorService/GenerateRandomNumbersResponse")]
-        System.Threading.Tasks.Task GenerateRandomNumbersAsync(System.Guid requestId, int count, int delayInMs);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICalculatorService/Execute", ReplyAction="*")]
+        System.Threading.Tasks.Task<Lab.WCFIsDead.WCF.Client.CalculatorClient.ExecuteResponse> ExecuteAsync(Lab.WCFIsDead.WCF.Client.CalculatorClient.ExecuteRequest request);
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface ICalculatorServiceCallback {
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ExecuteRequest {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICalculatorService/Receive")]
-        void Receive(System.Guid requestId, double randomNumber);
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="Execute", Namespace="http://tempuri.org/", Order=0)]
+        public Lab.WCFIsDead.WCF.Client.CalculatorClient.ExecuteRequestBody Body;
+        
+        public ExecuteRequest() {
+        }
+        
+        public ExecuteRequest(Lab.WCFIsDead.WCF.Client.CalculatorClient.ExecuteRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ExecuteRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public Lab.WCFIsDead.WCF.Client.CalculatorClient.Calculation calculation;
+        
+        public ExecuteRequestBody() {
+        }
+        
+        public ExecuteRequestBody(Lab.WCFIsDead.WCF.Client.CalculatorClient.Calculation calculation) {
+            this.calculation = calculation;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ExecuteResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ExecuteResponse", Namespace="http://tempuri.org/", Order=0)]
+        public Lab.WCFIsDead.WCF.Client.CalculatorClient.ExecuteResponseBody Body;
+        
+        public ExecuteResponse() {
+        }
+        
+        public ExecuteResponse(Lab.WCFIsDead.WCF.Client.CalculatorClient.ExecuteResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ExecuteResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public Lab.WCFIsDead.WCF.Client.CalculatorClient.CalculationResult ExecuteResult;
+        
+        public ExecuteResponseBody() {
+        }
+        
+        public ExecuteResponseBody(Lab.WCFIsDead.WCF.Client.CalculatorClient.CalculationResult ExecuteResult) {
+            this.ExecuteResult = ExecuteResult;
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -181,42 +234,50 @@ namespace Lab.WCFIsDead.WCF.Client.CalculatorClient {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class CalculatorServiceClient : System.ServiceModel.DuplexClientBase<Lab.WCFIsDead.WCF.Client.CalculatorClient.ICalculatorService>, Lab.WCFIsDead.WCF.Client.CalculatorClient.ICalculatorService {
+    public partial class CalculatorServiceClient : System.ServiceModel.ClientBase<Lab.WCFIsDead.WCF.Client.CalculatorClient.ICalculatorService>, Lab.WCFIsDead.WCF.Client.CalculatorClient.ICalculatorService {
         
-        public CalculatorServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
-                base(callbackInstance) {
+        public CalculatorServiceClient() {
         }
         
-        public CalculatorServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
-                base(callbackInstance, endpointConfigurationName) {
+        public CalculatorServiceClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
         }
         
-        public CalculatorServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
-                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        public CalculatorServiceClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
         }
         
-        public CalculatorServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        public CalculatorServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
         }
         
-        public CalculatorServiceClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(callbackInstance, binding, remoteAddress) {
+        public CalculatorServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Lab.WCFIsDead.WCF.Client.CalculatorClient.ExecuteResponse Lab.WCFIsDead.WCF.Client.CalculatorClient.ICalculatorService.Execute(Lab.WCFIsDead.WCF.Client.CalculatorClient.ExecuteRequest request) {
+            return base.Channel.Execute(request);
         }
         
         public Lab.WCFIsDead.WCF.Client.CalculatorClient.CalculationResult Execute(Lab.WCFIsDead.WCF.Client.CalculatorClient.Calculation calculation) {
-            return base.Channel.Execute(calculation);
+            Lab.WCFIsDead.WCF.Client.CalculatorClient.ExecuteRequest inValue = new Lab.WCFIsDead.WCF.Client.CalculatorClient.ExecuteRequest();
+            inValue.Body = new Lab.WCFIsDead.WCF.Client.CalculatorClient.ExecuteRequestBody();
+            inValue.Body.calculation = calculation;
+            Lab.WCFIsDead.WCF.Client.CalculatorClient.ExecuteResponse retVal = ((Lab.WCFIsDead.WCF.Client.CalculatorClient.ICalculatorService)(this)).Execute(inValue);
+            return retVal.Body.ExecuteResult;
         }
         
-        public System.Threading.Tasks.Task<Lab.WCFIsDead.WCF.Client.CalculatorClient.CalculationResult> ExecuteAsync(Lab.WCFIsDead.WCF.Client.CalculatorClient.Calculation calculation) {
-            return base.Channel.ExecuteAsync(calculation);
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<Lab.WCFIsDead.WCF.Client.CalculatorClient.ExecuteResponse> Lab.WCFIsDead.WCF.Client.CalculatorClient.ICalculatorService.ExecuteAsync(Lab.WCFIsDead.WCF.Client.CalculatorClient.ExecuteRequest request) {
+            return base.Channel.ExecuteAsync(request);
         }
         
-        public void GenerateRandomNumbers(System.Guid requestId, int count, int delayInMs) {
-            base.Channel.GenerateRandomNumbers(requestId, count, delayInMs);
-        }
-        
-        public System.Threading.Tasks.Task GenerateRandomNumbersAsync(System.Guid requestId, int count, int delayInMs) {
-            return base.Channel.GenerateRandomNumbersAsync(requestId, count, delayInMs);
+        public System.Threading.Tasks.Task<Lab.WCFIsDead.WCF.Client.CalculatorClient.ExecuteResponse> ExecuteAsync(Lab.WCFIsDead.WCF.Client.CalculatorClient.Calculation calculation) {
+            Lab.WCFIsDead.WCF.Client.CalculatorClient.ExecuteRequest inValue = new Lab.WCFIsDead.WCF.Client.CalculatorClient.ExecuteRequest();
+            inValue.Body = new Lab.WCFIsDead.WCF.Client.CalculatorClient.ExecuteRequestBody();
+            inValue.Body.calculation = calculation;
+            return ((Lab.WCFIsDead.WCF.Client.CalculatorClient.ICalculatorService)(this)).ExecuteAsync(inValue);
         }
     }
 }

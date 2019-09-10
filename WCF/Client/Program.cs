@@ -1,10 +1,13 @@
 ﻿using Lab.WCFIsDead.WCF.Client.CalculatorClient;
+using Lab.WCFIsDead.WCF.Client.RandomNumberClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using Calculation = Lab.WCFIsDead.WCF.Client.CalculatorClient.Calculation;
+using CalculatorServiceClient = Lab.WCFIsDead.WCF.Client.CalculatorClient.CalculatorServiceClient;
 
 namespace Lab.WCFIsDead.WCF.Client
 {
@@ -12,7 +15,7 @@ namespace Lab.WCFIsDead.WCF.Client
     {
         static void Main(string[] args)
         {
-            var calulatorClient = new CalculatorServiceClient(new InstanceContext(new RandomNumberReceiver()));
+            var calulatorClient = new CalculatorServiceClient("BasicHttpBinding_ICalculatorService");
 
             var result = calulatorClient.Execute(new Calculation()
             {
@@ -23,15 +26,17 @@ namespace Lab.WCFIsDead.WCF.Client
 
             Console.WriteLine(result.Result);
 
-            calulatorClient.GenerateRandomNumbers(Guid.NewGuid(), 10, 5000);
-            calulatorClient.GenerateRandomNumbers(Guid.NewGuid(), 20, 2500);
+            var randomNumberClient = new RandomNumberGeneratorClient(new InstanceContext(new RandomNumberReceiver()));
+
+            randomNumberClient.GenerateRandomNumbers(Guid.NewGuid(), 10, 5000);
+            randomNumberClient.GenerateRandomNumbers(Guid.NewGuid(), 20, 2500);
 
             Console.ReadLine();
 
         }
     }
 
-    public class RandomNumberReceiver : ICalculatorServiceCallback
+    public class RandomNumberReceiver : IRandomNumberGeneratorCallback
     {
         public void Receive(Guid requestId, double randomNumber)
         {

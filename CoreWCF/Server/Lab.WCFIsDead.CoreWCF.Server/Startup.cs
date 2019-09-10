@@ -19,8 +19,10 @@ namespace Lab.WCFIsDead.CoreWCF.Server
             app.UseServiceModel(builder =>
             {
                 builder.AddService<CalculatorService>();
-                builder.AddServiceEndpoint<CalculatorService, ICalculatorService>(new BasicHttpBinding(), "/basichttp");
-                builder.AddServiceEndpoint<CalculatorService, ICalculatorService>(new NetTcpBinding(), "/nettcp");
+                builder.AddServiceEndpoint<CalculatorService, ICalculatorService>(new BasicHttpBinding(), "calculator");
+                builder.AddServiceEndpoint<CalculatorService, ICalculatorService>(new NetTcpBinding(), "calculator");
+                builder.AddServiceEndpoint<CalculatorService, IRandomNumberGenerator>(new NetTcpBinding(), "randomNumber");
+
             });
         }
 

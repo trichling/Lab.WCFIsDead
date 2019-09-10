@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="CalculatorService.cs" />
     <Compile Include="ICalculatorService.cs" />
+    <Compile Include="IRandomNumberGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

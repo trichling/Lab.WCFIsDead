@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Lab.WCFIsDead.SoapCore.Shared.Contract;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.ServiceModel;
 
-namespace Lab.WCFIsDead.WCF.Server
+namespace Lab.WCFIsDead.SoapCore.Server
 {
-    public class CalculatorService : ICalculatorService, IRandomNumberGenerator
+    public class CalculatorService : ICalculatorService
     {
         private Dictionary<string, Func<Calculation, CalculationResult>> Operations = new Dictionary<string, Func<Calculation, CalculationResult>>();
 
@@ -22,17 +22,5 @@ namespace Lab.WCFIsDead.WCF.Server
             return Operations[calculation.Opertor](calculation);
         }
 
-        public void GenerateRandomNumbers(Guid requestId, int count, int delayInMs)
-        {
-            var receiver = OperationContext.Current.GetCallbackChannel<IRandomNumber>();
-            Task.Run(async () =>
-            {
-                for (var counter = 0; counter < count; counter++)
-                {
-                    await Task.Delay(delayInMs);
-                    receiver.Receive(requestId, new Random().NextDouble());
-                }
-            });
-        }
     }
 }

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:http="http://schemas.microsoft.com/ws/06/2004/policy/http" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://tempuri.org/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="ICalculatorService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/System" />
+      <xs:element name="Execute">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="calculation" type="tns:Calculation" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ExecuteResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="ExecuteResult" type="tns:CalculationResult" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="Calculation">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="Operand1" type="xs:decimal" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Operand2" type="xs:decimal" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Opertor" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="Calculation" nillable="true" type="tns:Calculation" />
+      <xs:complexType name="CalculationResult">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Calculation" type="tns:Calculation" />
+          <xs:element minOccurs="1" maxOccurs="1" name="Result" type="xs:decimal" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="CalculationResult" nillable="true" type="tns:CalculationResult" />
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="ICalculatorService_Execute_InputMessage">
+    <wsdl:part name="parameters" element="tns:Execute" />
+  </wsdl:message>
+  <wsdl:message name="ICalculatorService_Execute_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ExecuteResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ICalculatorService">
+    <wsdl:operation name="Execute">
+      <wsdl:input message="tns:ICalculatorService_Execute_InputMessage" />
+      <wsdl:output message="tns:ICalculatorService_Execute_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_ICalculatorService" type="tns:ICalculatorService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Execute">
+      <soap:operation soapAction="http://tempuri.org/ICalculatorService/Execute" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ICalculatorService">
+    <wsdl:port name="BasicHttpBinding_ICalculatorService" binding="tns:BasicHttpBinding_ICalculatorService">
+      <soap:address location="http://localhost:8080/CalculatorService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

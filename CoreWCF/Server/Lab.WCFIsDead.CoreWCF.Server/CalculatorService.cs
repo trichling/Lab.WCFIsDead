@@ -6,7 +6,7 @@ using Lab.WCFIsDead.CoreWCF.Shared.Contract;
 
 namespace Lab.WCFIsDead.CoreWCF.Server
 {
-    public class CalculatorService : ICalculatorService
+    public class CalculatorService : ICalculatorService, IRandomNumberGenerator
     {
         private Dictionary<string, Func<Calculation, CalculationResult>> Operations = new Dictionary<string, Func<Calculation, CalculationResult>>();
 

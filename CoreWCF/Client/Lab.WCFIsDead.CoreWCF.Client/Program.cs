@@ -8,15 +8,14 @@ namespace Lab.WCFIsDead.CoreWCF.Client
     {
         static void Main(string[] args)
         {
+            CallViaBasicHttp();
             CallViaTcp();
         }
 
         private static void CallViaBasicHttp()
         {
-            var factory = new ChannelFactory<ICalculatorService>(new BasicHttpBinding(), new EndpointAddress("http://localhost:8080/basichttp"));
-            factory.Open();
+            var factory = new ChannelFactory<ICalculatorService>(new BasicHttpBinding(), new EndpointAddress("http://localhost:8080/calculator"));
             var channel = factory.CreateChannel();
-            ((IClientChannel)channel).Open();
 
             var result = channel.Execute(new Calculation()
             {
@@ -25,17 +24,15 @@ namespace Lab.WCFIsDead.CoreWCF.Client
                 Opertor = "+"
             });
 
-            ((IClientChannel)channel).Close();
-            factory.Close();
+            Console.WriteLine(result.Result);
+
         }
 
         private static void CallViaTcp()
         {
-            using (var factory = new DuplexChannelFactory<ICalculatorService>(new InstanceContext(new RandomNumberReceiver()), new NetTcpBinding(), new EndpointAddress("net.tcp://localhost:8808/nettcp")))
+            using (var factory = new ChannelFactory<ICalculatorService>(new NetTcpBinding(), new EndpointAddress("net.tcp://localhost:8808/calculator")))
             {
                 var channel = factory.CreateChannel();
-                ((ICommunicationObject)channel).Open();
-
                 var result = channel.Execute(new Calculation()
                 {
                     Operand1 = 1,
@@ -44,6 +41,12 @@ namespace Lab.WCFIsDead.CoreWCF.Client
                 });
 
                 Console.WriteLine(result.Result);
+                Console.ReadLine();
+            }
+
+            using (var factory = new DuplexChannelFactory<IRandomNumberGenerator>(new InstanceContext(new RandomNumberReceiver()), new NetTcpBinding(), new EndpointAddress("net.tcp://localhost:8808/randomNumber")))
+            {
+                var channel = factory.CreateChannel();                
 
                 channel.GenerateRandomNumbers(Guid.NewGuid(), 10, 5000);
                 channel.GenerateRandomNumbers(Guid.NewGuid(), 20, 2500);
