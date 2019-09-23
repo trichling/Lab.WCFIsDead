@@ -1,32 +1,67 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 
 namespace Lab.WCFIsDead.ASPNETCore.Web.Hubs
 {
     public class RandomNumberHub : Hub
     {
+
         public RandomNumberHub()
         {
         }
 
-        public async Task GetRandomNumbers(Guid requestId, int count, int delayInMs)
+        //public async Task GetRandomNumbers(Guid requestId, int count, int delayInMs)
+        //{
+        //    //await Groups.AddToGroupAsync(Context.ConnectionId, requestId.ToString());
+
+        //    //await Task.Run(async () =>
+        //    //{
+        //    //    for (var counter = 0; counter < count; counter++)
+        //    //    {
+        //    //        await Task.Delay(delayInMs);
+        //    //        await Clients.Client(Context.ConnectionId).SendAsync("receive", requestId, new Random().NextDouble());
+        //    //    }
+        //    //});
+
+        //    //await Groups.RemoveFromGroupAsync(Context.ConnectionId, requestId.ToString());
+
+        //}
+
+        public ChannelReader<RandomNumberResult> GetRandomNumbers(Guid requestId, int count, int delayInMs)
         {
-            //await Groups.AddToGroupAsync(Context.ConnectionId, requestId.ToString());
+            var channel = Channel.CreateUnbounded<RandomNumberResult>();
 
-            await Task.Run(async () =>
-            {
-                for (var counter = 0; counter < count; counter++)
-                {
-                    await Task.Delay(delayInMs);
-                    await Clients.Client(Context.ConnectionId).SendAsync("Receive", requestId, new Random().NextDouble());
-                }
-            });
+            _ = Generate(channel.Writer, requestId, count, delayInMs);
 
-            //await Groups.RemoveFromGroupAsync(Context.ConnectionId, requestId.ToString());
+            return channel.Reader;
         }
+
+        private async Task Generate(ChannelWriter<RandomNumberResult> writer, Guid requestId, int count, int delayInMs)
+        {
+            for (var counter = 0; counter < count; counter++)
+            {
+                await Task.Delay(delayInMs);
+                await writer.WriteAsync(new RandomNumberResult() { RequestId = requestId, RandomNumber = new Random().NextDouble() });
+            }
+
+            writer.TryComplete();
+        }
+
+    }
+
+    public class RandomNumberResult
+    {
+
+        public Guid RequestId { get; set; }
+        public double RandomNumber { get; set; }
 
     }
 }

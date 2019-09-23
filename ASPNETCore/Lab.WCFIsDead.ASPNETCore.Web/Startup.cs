@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Lab.WCFIsDead.ASPNETCore.Web.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -15,7 +16,11 @@ namespace Lab.WCFIsDead.ASPNETCore.Web
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc()
+                .AddRazorPagesOptions(options => 
+                {
+                    
+                });
             services.AddSignalR();
         }
 
@@ -30,7 +35,7 @@ namespace Lab.WCFIsDead.ASPNETCore.Web
             app.UseStaticFiles();
 
             app.UseSignalR(hub => {
-                //hub.MapHub
+                hub.MapHub<RandomNumberHub>("/hubs/randomNumbers");
             });
 
             app.UseMvc();
