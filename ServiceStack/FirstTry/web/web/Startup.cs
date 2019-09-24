@@ -29,7 +29,6 @@ namespace web
 
             app.UseServiceStack(new AppHost
             {
-                
                 AppSettings = new NetCoreAppSettings(Configuration)
             });
         }
@@ -47,7 +46,7 @@ namespace web
                 DefaultRedirectPath = "/metadata",
                 DebugMode = AppSettings.Get(nameof(HostConfig.DebugMode), false)
             });
-            //Plugins.Add(new SoapFormat());
+            Plugins.Add(new ServerEventsFeature());
         }
     }
 }

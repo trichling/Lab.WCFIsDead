@@ -39,6 +39,11 @@ namespace Lab.WCFIsDead.ASPNETCore.Web
             });
 
             app.UseMvc();
+
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "client";
+            });
         }
     }
 }

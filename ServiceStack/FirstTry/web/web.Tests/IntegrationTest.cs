@@ -3,6 +3,9 @@ using ServiceStack;
 using NUnit.Framework;
 using web.ServiceInterface;
 using web.ServiceModel;
+using System.Threading.Tasks;
+using System;
+using System.Diagnostics;
 
 namespace web.Tests
 {
@@ -17,6 +20,7 @@ namespace web.Tests
 
             public override void Configure(Container container)
             {
+                Plugins.Add(new ServerEventsFeature());
             }
         }
 
@@ -32,6 +36,8 @@ namespace web.Tests
 
         public IServiceClient CreateClient() => new JsonServiceClient(BaseUri);
 
+        public ServerEventsClient CreateServerEventsClient() => new ServerEventsClient(BaseUri);
+
         [Test]
         public void Can_call_Hello_Service()
         {
@@ -40,6 +46,48 @@ namespace web.Tests
             var response = client.Get(new Hello { Name = "World" });
 
             Assert.That(response.Result, Is.EqualTo("Hello, World!"));
+        }
+
+        [Test]
+        public async Task Can_ReceiveServerEvents()
+        {
+            var client = CreateServerEventsClient();
+
+            var connectMsg = await client.Connect();
+            var joinMsg = await client.WaitForNextCommand();
+
+            var firstSequence = Guid.NewGuid().ToString();
+            client.SubscribeToChannels(firstSequence);
+            client.ServiceClient.Post(new GenerateRandomNumbers
+            {
+                //RequestId = client.SubscriptionId,
+                RequestId = firstSequence,
+                Count = 10,
+                DelayInMs = 1000
+            });
+
+            var secondSequence = Guid.NewGuid().ToString();
+            client.SubscribeToChannels(secondSequence);
+            client.ServiceClient.Post(new GenerateRandomNumbers
+            {
+                //RequestId = client.SubscriptionId,
+                RequestId = secondSequence,
+                Count = 5,
+                DelayInMs = 2000
+            });
+
+            //ServerEventMessage msg = null;
+
+            //for (var counter = 0; counter < 15; counter++)
+            //{
+            //    msg = await client.WaitForNextMessage();
+            //    Debug.WriteLine($"{msg.Channel}: {msg.Data}");
+            //}
+
+            client.OnMessage = msg1 => Debug.WriteLine($"{msg1.Channel}: {msg1.Json}");
+
+
+            await Task.Delay(20 * 1000);
         }
     }
 }
