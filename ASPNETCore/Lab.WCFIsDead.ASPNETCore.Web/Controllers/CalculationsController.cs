@@ -9,7 +9,7 @@ namespace Lab.WCFIsDead.ASPNETCore.Web.Controllers
 {
     [ApiController]
     [Route("calculations")]
-    public class CalculationsController : Controller
+    public class CalculationsController : ControllerBase
     {
 
         private static Dictionary<Guid, CalculationResult> CalculationResults = new Dictionary<Guid, CalculationResult>();
@@ -24,13 +24,17 @@ namespace Lab.WCFIsDead.ASPNETCore.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult GetAllCalculations()
         {
-            return Ok(CalculationResults);
+            return Ok(CalculationResults.Select(kvp => new 
+            { 
+                Id = kvp.Key,
+                Calculation = kvp.Value
+            }).ToList());
         }
 
-        [HttpGet("{id}", Name = "GetCalculationById")]
-        public IActionResult GetCalculationResult(Guid id)
+        [HttpGet("{id}")]
+        public ActionResult<CalculationResult> GetCalculationResult(Guid id)
         {
             if (!CalculationResults.ContainsKey(id))
                 return NotFound();
@@ -39,13 +43,13 @@ namespace Lab.WCFIsDead.ASPNETCore.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Calculation calculation)
+        public IActionResult CreateCalculationRequest(Calculation calculation)
         {
             var resultId = Guid.NewGuid();
             var calulationResult = Operations[calculation.Operator](calculation);
             CalculationResults.Add(resultId, calulationResult);
 
-            return CreatedAtRoute("GetCalculationById", new { id = resultId }, calulationResult);
+            return CreatedAtAction(nameof(GetCalculationResult), new { id = resultId }, calulationResult);
         }
 
     }
