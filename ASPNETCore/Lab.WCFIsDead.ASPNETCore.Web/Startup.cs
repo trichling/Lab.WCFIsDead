@@ -22,7 +22,7 @@ namespace Lab.WCFIsDead.ASPNETCore.Web
             });
 
             services.AddControllers();
-
+            
             services.AddSignalR();
 
             services.AddSwaggerGen(c =>
@@ -32,9 +32,9 @@ namespace Lab.WCFIsDead.ASPNETCore.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
+            if (env.EnvironmentName == "Development")
             {
                 app.UseDeveloperExceptionPage();
             }
