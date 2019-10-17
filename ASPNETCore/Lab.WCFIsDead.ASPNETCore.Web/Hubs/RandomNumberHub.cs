@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using Lab.WCFIsDead.ASPNETCore.Web.Models;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
@@ -18,33 +19,25 @@ namespace Lab.WCFIsDead.ASPNETCore.Web.Hubs
         {
         }
 
-        public ChannelReader<RandomNumberResult> GetRandomNumbers(Guid requestId, int count, int delayInMs)
+        public ChannelReader<RandomNumberResult> GetRandomNumbers(Guid requestId, int count, int delayInMs, CancellationToken token)
         {
             var channel = Channel.CreateUnbounded<RandomNumberResult>();
 
-            _ = Generate(channel.Writer, requestId, count, delayInMs);
+            _ = Generate(channel.Writer, requestId, count, delayInMs, token);
 
             return channel.Reader;
         }
 
-        private async Task Generate(ChannelWriter<RandomNumberResult> writer, Guid requestId, int count, int delayInMs)
+        private async Task Generate(ChannelWriter<RandomNumberResult> writer, Guid requestId, int count, int delayInMs, CancellationToken token)
         {
             for (var counter = 0; counter < count; counter++)
             {
-                await Task.Delay(delayInMs);
+                await Task.Delay(delayInMs, token);
                 await writer.WriteAsync(new RandomNumberResult() { RequestId = requestId, RandomNumber = new Random().NextDouble() });
             }
 
             writer.TryComplete();
         }
-
-    }
-
-    public class RandomNumberResult
-    {
-
-        public Guid RequestId { get; set; }
-        public double RandomNumber { get; set; }
 
     }
 }
