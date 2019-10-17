@@ -21,7 +21,7 @@ namespace Lab.WCFIsDead.AzureServiceBus.Client
 
             responseQueue.RegisterMessageHandler(ProcessMessagesAsync, new MessageHandlerOptions(ExceptionReceivedHandler));
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 1; i++)
             {
                 var calculation = new Calculation()
                 {
@@ -34,7 +34,7 @@ namespace Lab.WCFIsDead.AzureServiceBus.Client
                 var message = new Message(Encoding.UTF8.GetBytes(messageBody));
                 Console.WriteLine($"Sending message: {messageBody}");
 
-               //await requestQueue.SendAsync(message);
+               await requestQueue.SendAsync(message);
             }
 
             Console.ReadLine();

@@ -4,7 +4,7 @@ namespace Lab.WCFIsDead.AzureServiceBus.Shared
 {
     public static class Constants
     {
-        public const string ServiceBusConnectionString = "Endpoint=sb://tobidevtest.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=BiFwF9pzO/+jboxuvkgMGAL25lZrbG/PeJ0YAr5UJt4=";
+        public const string ServiceBusConnectionString = "Endpoint=sb://tobidevtest.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=jiHSeEVW/ka/OEfiE3A1S4pcnR/9zKrmDHrrEl36qA8=";
         public const string RequestQueueName = "calculations";
         public const string ResponseQueueName = "calculationresponses";
     }
