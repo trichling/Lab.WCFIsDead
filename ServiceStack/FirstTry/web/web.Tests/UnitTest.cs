@@ -24,9 +24,9 @@ namespace web.Tests
         {
             var service = appHost.Container.Resolve<MyServices>();
 
-            var response = (HelloResponse)service.Any(new Hello { Name = "World" });
+            var response = service.Post(new Calculation { Operand1 = 1, Operand2 = 2, Operator = "+" });
 
-            Assert.That(response.Result, Is.EqualTo("Hello, World!"));
+            Assert.That(response.Result, Is.EqualTo(3.0M));
         }
     }
 }

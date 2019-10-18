@@ -43,7 +43,7 @@ namespace web.Tests
         {
             var client = CreateClient();
 
-            var response = client.Get(new Hello { Name = "World" });
+            var response = client.Post(new Calculation { Operand1 = 1, Operand2 = 2, Operator = "+" });
 
             Assert.That(response.Result, Is.EqualTo("Hello, World!"));
         }
@@ -60,7 +60,6 @@ namespace web.Tests
             client.SubscribeToChannels(firstSequence);
             client.ServiceClient.Post(new GenerateRandomNumbers
             {
-                //RequestId = client.SubscriptionId,
                 RequestId = firstSequence,
                 Count = 10,
                 DelayInMs = 1000
@@ -70,19 +69,10 @@ namespace web.Tests
             client.SubscribeToChannels(secondSequence);
             client.ServiceClient.Post(new GenerateRandomNumbers
             {
-                //RequestId = client.SubscriptionId,
                 RequestId = secondSequence,
                 Count = 5,
                 DelayInMs = 2000
             });
-
-            //ServerEventMessage msg = null;
-
-            //for (var counter = 0; counter < 15; counter++)
-            //{
-            //    msg = await client.WaitForNextMessage();
-            //    Debug.WriteLine($"{msg.Channel}: {msg.Data}");
-            //}
 
             client.OnMessage = msg1 => Debug.WriteLine($"{msg1.Channel}: {msg1.Json}");
 

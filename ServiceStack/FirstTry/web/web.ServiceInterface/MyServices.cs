@@ -20,12 +20,7 @@ namespace web.ServiceInterface
 
         public IServerEvents ServerEvents { get; set; }
 
-        public object Any(Hello request)
-        {
-            return new HelloResponse { Result = $"Hello, {request.Name}!" };
-        }
-
-        public object Any(Calculation request)
+        public CalculationResult Post(Calculation request)
         {
             return Operations[request.Operator](request);
         }
