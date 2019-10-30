@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.10.1" />
+    <PackageReference Include="Grpc" Version="2.24.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.24.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <!--  Uncomment this to build the server / client base classes here -->
+  <!--  This means to include a reference to the dll into server / client projects and derive from the classes produced here -->
+  <!--  As opposed to referencing the .proto file in a server / client project (possibly through nuget: https://github.com/grpc/grpc-dotnet/issues/183) and genereate the code there -->
+  
+  <!-- <ItemGroup>
+    <Protobuf Include="Calculator.proto" />
+  </ItemGroup> -->
+
+</Project>

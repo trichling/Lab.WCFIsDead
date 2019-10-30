@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option csharp_namespace = "Lab.WCFIsDead.gRPC.Shared";
+
+package Calculator;
+
+service Calculator {
+    rpc Execute (Calculation) returns (CalculationResult);
+}
+
+message Calculation {
+    double Operand1 = 1;
+    double Operand2 = 2;
+    string Operator = 3;
+}
+
+message CalculationResult {
+    Calculation Calculation = 1;
+    double Result = 2;
+}

@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Could also be done through a nuget packge: https://github.com/grpc/grpc-dotnet/issues/183 -->
+    <Protobuf Include="..\..\shared\Lab.WCFIsDead.gRPC.Shared\Calculator.proto" Link="Protos\Calculator.proto"  GrpcServices="Server" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Grpc.AspNetCore" Version="2.24.0" />
+  </ItemGroup>
+
+</Project>
