@@ -33,6 +33,7 @@ namespace Lab.WCFIsDead.gRPC.Server
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGrpcService<CalculatorService>();
+                endpoints.MapGrpcService<RandomNumberService>();
 
                 endpoints.MapGet("/", async context =>
                 {

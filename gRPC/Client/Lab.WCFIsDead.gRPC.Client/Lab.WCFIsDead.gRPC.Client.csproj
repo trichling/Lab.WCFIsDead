@@ -5,4 +5,20 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <!-- Could also be done through a nuget packge: https://github.com/grpc/grpc-dotnet/issues/183 -->
+    <Protobuf Include="..\..\shared\Lab.WCFIsDead.gRPC.Shared\Calculator.proto" Link="Protos\Calculator.proto" GrpcServices="Client" />
+    <Protobuf Include="..\..\shared\Lab.WCFIsDead.gRPC.Shared\RandomNumbers.proto" Link="Protos\RandomNumbers.proto" GrpcServices="Client" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.10.1" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.25.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.25.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+
 </Project>

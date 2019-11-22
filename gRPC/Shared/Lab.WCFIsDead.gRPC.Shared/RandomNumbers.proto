@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option csharp_namespace = "Lab.WCFIsDead.gRPC.Shared";
+
+package RandomNumbers;
+
+service RandomNumberGenerator {
+    rpc GenerateRandomNumbers (RandomNumberRequest) returns (stream RandomNumberResponse);
+}
+
+message RandomNumberRequest {
+    string RequestId = 1;
+    int32 Count = 2;
+    int32 DelayInMs = 3;
+}
+
+message RandomNumberResponse {
+    string RequestId = 1;
+    double RandomNumber = 2;
+}

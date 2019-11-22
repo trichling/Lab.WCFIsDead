@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.SpaServices;
 
 namespace Lab.WCFIsDead.ASPNETCore.Web
 {
@@ -55,6 +56,15 @@ namespace Lab.WCFIsDead.ASPNETCore.Web
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();
             });
+
+          
+
+            //app.Use(async (ctx, next) =>
+            //{
+            //    var scriptRunner = new NpmScriptRunner
+
+            //    await next();
+            //});
 
             //app.UseSpa(spa =>
             //{
