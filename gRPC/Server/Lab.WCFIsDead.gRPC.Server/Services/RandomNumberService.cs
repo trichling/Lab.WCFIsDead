@@ -10,7 +10,6 @@ namespace Lab.WCFIsDead.gRPC.Server.Services
         
         public override Task GenerateRandomNumbers(RandomNumberRequest request, IServerStreamWriter<RandomNumberResponse> responseStream, Grpc.Core.ServerCallContext context)
         {
-
             return Task.Run(async () =>
             {
                 for (var counter = 0; counter < request.Count; counter++)
